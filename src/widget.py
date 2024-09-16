@@ -26,6 +26,7 @@ def mask_account_card(card_details: str) -> str:
 
     return f"{card_or_account_type} {masked_number}"
 
+
 print(mask_account_card("Visa Platinum 7000792289606361"))
 
 
@@ -36,12 +37,12 @@ def get_data(date: str) -> str:
         raise ValueError("Date string is empty")
 
     # Проверка на наличие символа 'T' в строке даты
-    if 'T' not in date:
+    if "T" not in date:
         raise ValueError("Incomplete date format")
 
-    date_part = date.split('T')[0]  # берем только часть до T
+    date_part = date.split("T")[0]  # берем только часть до T
 
-    parts = date_part.split('-')
+    parts = date_part.split("-")
     if len(parts) != 3 or not all(part.isdigit() for part in parts):
         raise ValueError("Invalid date format")  # Это будет выбрасываться для некорректных форматов
 
