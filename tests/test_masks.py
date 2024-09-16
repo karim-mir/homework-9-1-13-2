@@ -1,5 +1,5 @@
 import pytest
-from src.masks import get_mask_card_number, get_mask_account  # Обратите внимание на правильный импорт
+from src.masks import get_mask_card_number, get_mask_account
 
 
 @pytest.fixture
@@ -40,7 +40,7 @@ def account_numbers():
 
 
 @pytest.fixture
-def expected_results_account():
+def expected_results_account_user():
     return [
         "7365 41** **** 4305",  # Ожидаемый результат для первого теста (обновлен)
         ValueError,  # Ожидаемое исключение для второго теста
