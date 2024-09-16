@@ -1,10 +1,18 @@
 def get_mask_card_number(card_number: int) -> str:
-    """Преобразуем номер карты в строку"""
+    """Преобразуем номер карты в строку с маской"""
+    # Преобразуем номер карты в строку
     card_number_str = str(card_number)
+
+    # Проверяем, состоит ли номер карты только из цифр и имеет ли нужную длину
+    if not card_number_str.isdigit() or len(card_number_str) < 16 or len(card_number_str) > 19:
+        raise ValueError("Введен некорректный номер карты")
+
     # Создаем маску: оставляем первые 6 символов, затем заменяем на *, и оставляем последние 4 символа
-    masked_card_number_str = card_number_str[:6] + "*" * 6 + card_number_str[-4:]
+    masked_card_number_str = card_number_str[:6] + "*" * (len(card_number_str) - 10) + card_number_str[-4:]
+
     # Разделяем строку на группы по 4 символа
-    masked_card_number = [masked_card_number_str[i : i + 4] for i in range(0, len(masked_card_number_str), 4)]
+    masked_card_number = [masked_card_number_str[i: i + 4] for i in range(0, len(masked_card_number_str), 4)]
+
     # Объединяем группы с пробелами
     return " ".join(masked_card_number)
 
