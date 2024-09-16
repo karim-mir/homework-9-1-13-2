@@ -19,7 +19,7 @@ def get_mask_account(account_number: int) -> str:
     account_number_str = str(account_number)
 
     # Проверяем, состоит ли номер счета только из цифр и имеет ли нужную длину
-    if not account_number_str.isdigit() or len(account_number_str) < 20 or len(account_number_str) > 20:
+    if not account_number_str.isdigit() or len(account_number_str) != 20:
         raise ValueError("Введен некорректный номер счета")
 
     # Создаем маску: оставляем первые 4 символа, 2 маскированные и 4 последние

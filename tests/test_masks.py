@@ -1,22 +1,23 @@
 import pytest
-from src.masks import get_mask_card_number, get_mask_account
+
+from src.masks import get_mask_account, get_mask_card_number
 
 
 @pytest.fixture
 def card_numbers():
     return [
-        7000792289606361,  # Вводимое значение для первого теста
-        0,  # Вводимое значение для второго теста (для проверки пустыми)
-        700079228960636100,  # Вводимое значение для третьего теста
+        7000792289606361,  # Input value for the first test
+        0,  # Input value for the second test (for empty check)
+        700079228960636100,  # Input value for the third test
     ]
 
 
 @pytest.fixture
 def expected_results():
     return [
-        "7000 79** **** 6361",  # Ожидаемый результат для первого теста
-        ValueError,  # Ожидаемое исключение для второго теста
-        ValueError,  # Ожидаемое исключение для третьего теста
+        "7000 79** **** 6361",  # Expected result for the first test
+        ValueError,  # Expected exception for the second test
+        ValueError,  # Expected exception for the third test
     ]
 
 
@@ -33,18 +34,18 @@ def test_get_mask_card_number(card_numbers, expected_results):
 @pytest.fixture
 def account_numbers():
     return [
-        73654108430135874305,  # Вводимое значение для первого теста
-        0,  # Вводимое значение для второго теста (для проверки пустыми)
-        700079228960636100,  # Вводимое значение для третьего теста
+        73654108430135874305,  # Input value for the first test
+        0,  # Input value for the second test (for empty check)
+        700079228960636100,  # Input value for the third test
     ]
 
 
 @pytest.fixture
-def expected_results_account_user():
+def expected_results_account():
     return [
-        "7365 41** **** 4305",  # Ожидаемый результат для первого теста (обновлен)
-        ValueError,  # Ожидаемое исключение для второго теста
-        ValueError,  # Ожидаемое исключение для третьего теста
+        "7365 41** **** 4305",  # Expected result for the first test (updated)
+        ValueError,  # Expected exception for the second test
+        ValueError,  # Expected exception for the third test
     ]
 
 

@@ -1,5 +1,6 @@
 import pytest
-from src.widget import mask_account_card, get_data
+
+from src.widget import get_data, mask_account_card
 
 
 # Юнит-тесты для mask_account_card
@@ -16,7 +17,7 @@ from src.widget import mask_account_card, get_data
     ],
 )
 def test_mask_account_card(input_card_info, expected_output):
-    if expected_output is ValueError:
+    if expected_output == ValueError:
         with pytest.raises(ValueError):
             mask_account_card(input_card_info)
     else:
@@ -37,7 +38,7 @@ def test_mask_account_card(input_card_info, expected_output):
     ],
 )
 def test_get_data(input_data, expected_output):
-    if expected_output is ValueError:
+    if expected_output == ValueError:
         with pytest.raises(ValueError):
             get_data(input_data)
     else:
