@@ -1,4 +1,4 @@
-def get_mask_card_number(card_number):
+def get_mask_card_number(card_number: int) -> str:
     # Преобразуем число в строку и проверяем, состоит ли оно только из цифр
     card_str = str(card_number)
 

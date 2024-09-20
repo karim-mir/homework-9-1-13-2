@@ -1,3 +1,5 @@
+from typing import Dict, Generator, List, Union
+
 transactions = [
     {
         "id": 939719570,
@@ -12,6 +14,16 @@ transactions = [
         "id": 142264268,
         "state": "EXECUTED",
         "date": "2019-04-04T23:20:05.206878",
+        "operationAmount": {"amount": "79114.93", "currency": {"name": "EUR", "code": "EUR"}},
+        "description": "Перевод со счета на счет",
+        "from": "Счет 19708645243227258542",
+        "to": "Счет 75651667383060284188",
+    },
+    {},  # Пустая транзакция
+    {
+        "id": 142264269,
+        "state": "EXECUTED",
+        "date": "2019-04-04T23:20:05.206878",
         "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
         "description": "Перевод со счета на счет",
         "from": "Счет 19708645243227258542",
@@ -20,47 +32,39 @@ transactions = [
 ]
 
 
-def filter_by_currency(transactions: list, currency: str) -> dir:
+def filter_by_currency(transactions: List[Dict], currency: str) -> Generator[Union[Dict, str], None, None]:
     """Функция возвращает итератор, который поочередно выдает транзакции, где валюта операции соответствует заданной"""
-    if len(transactions) > 1:
-        for operation_in_transaction in transactions:
-            if operation_in_transaction.get("operationAmount").get("currency").get("name") == currency:
-                yield operation_in_transaction
-        yield "Нет значений"
+    found = False  # Флаг для отслеживания найденных транзакций
+    for operation_in_transaction in transactions:
+        if (
+            operation_in_transaction
+            and operation_in_transaction.get("operationAmount", {}).get("currency", {}).get("name") == currency
+        ):
+            found = True
+            yield operation_in_transaction
+
+    if not found:
+        yield "Нет значений"  # Возвращаем строку, если ничего не найдено
 
 
-usd_transactions = filter_by_currency(transactions, "USD")
-for i in range(2):
-    print(next(usd_transactions))
-
-
-def transaction_descriptions(transactions: list) -> str:
+def transaction_descriptions(transactions: List[Dict]) -> Generator[str, None, None]:
     """Функция принимает список словарей с транзакциями и возвращает описание каждой операции по очереди."""
     # Проверяем, если список пустой
     if not transactions:
         yield "Нет значений"
 
     for transaction in transactions:
-        description = transaction.get("description")
-        # Если описание отсутствует, можем возвращать некоторое сообщение или просто пропустить
-        if description:
-            yield description
-        else:
+        if not transaction:  # Проверяем пустую транзакцию
             yield "Описание отсутствует"
+            continue
+
+        description = transaction.get("description")
+        yield description if description else "Описание отсутствует"
 
 
-descriptions = transaction_descriptions(transactions)
-for i in range(2):
-    print(next(descriptions))
-
-
-def card_number_generator(start: int, stop: int):
-    """Генератор, который выдает номера банковских карт в формате: XXXX XXXX XXXX XXXX"""
+def card_number_generator(start: int, stop: int) -> Generator[str, None, None]:
+    """Генератор, который выдает номера банковских карт в формате: XXXX XXXX XXXX XXXX."""
     for number in range(start, stop + 1):
         yield f"{number:016d}"[:4] + " " + f"{number:016d}"[4:8] + " " + f"{number:016d}"[
             8:12
         ] + " " + f"{number:016d}"[12:]
-
-
-for card_number in card_number_generator(1, 5):
-    print(card_number)
