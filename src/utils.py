@@ -5,9 +5,7 @@ from typing import Dict, List
 
 # Создаем хэндлер
 handler = logging.FileHandler("logs.log", mode="w", encoding="utf-8")
-formatter = logging.Formatter(
-    "%(asctime)s:%(module)s:%(levelname)s:%(name)s:%(message)s"
-)
+formatter = logging.Formatter("%(asctime)s:%(module)s:%(levelname)s:%(name)s:%(message)s")
 handler.setFormatter(formatter)
 
 # Настраиваем логирование
@@ -15,7 +13,7 @@ logging.basicConfig(level=logging.INFO, handlers=[handler])
 
 logger = logging.getLogger()
 
-path = "data/operations.json"
+path = "data/transactions.json"
 
 
 def load_transactions(path: str) -> List[Dict]:
@@ -35,9 +33,7 @@ def load_transactions(path: str) -> List[Dict]:
         try:
             # Загружаем данные JSON
             data_operations = json.load(file)
-            logger.info(
-                "Данные успешно загружены: %s", str(data_operations)
-            )  # Отладочный вывод
+            logger.info("Данные успешно загружены: %s", str(data_operations))  # Отладочный вывод
         except json.JSONDecodeError:
             logger.error("Неподдерживаемый формат данных")
             return []
@@ -52,18 +48,10 @@ def load_transactions(path: str) -> List[Dict]:
     # Проходим по всем транзакциям в загруженных данных
     for transaction in data_operations:
         # Проверяем, что транзакция является словарем и содержит необходимые поля
-        if (
-            isinstance(transaction, dict)
-            and "id" in transaction
-            and "amount" in transaction
-        ):
+        if isinstance(transaction, dict) and "id" in transaction and "amount" in transaction:
             # Проверяем, что id является целым числом, а amount - числом (int или float)
-            if isinstance(transaction["id"], int) and isinstance(
-                transaction["amount"], (int, float)
-            ):
-                valid_transactions.append(
-                    transaction
-                )  # Добавляем валидную транзакцию в список
+            if isinstance(transaction["id"], int) and isinstance(transaction["amount"], (int, float)):
+                valid_transactions.append(transaction)  # Добавляем валидную транзакцию в список
 
     logger.info("Валидные транзакции загружены: %s", str(valid_transactions))
     return valid_transactions  # Возвращаем валидные транзакции

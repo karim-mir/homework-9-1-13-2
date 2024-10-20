@@ -15,7 +15,7 @@ class TestLoadTransactions(unittest.TestCase):
         """Тестирование загрузки файла с одной транзакцией."""
         mock_exists.return_value = True  # Настраиваем мок для существования файла
 
-        result = load_transactions("data/operations.json")
+        result = load_transactions("data/transactions.json")
 
         self.assertEqual(len(result), 1)  # Проверяем количество загруженных транзакций
         self.assertEqual(result[0]["id"], 1)  # Проверяем корректность id
@@ -26,7 +26,7 @@ class TestLoadTransactions(unittest.TestCase):
         """Тестирование поведения при отсутствии файла."""
         mock_exists.return_value = False  # Настраиваем мок для несуществующего файла
 
-        result = load_transactions("data/operations.json")
+        result = load_transactions("data/transactions.json")
 
         self.assertEqual(result, [])  # Ожидаем пустой список
 
@@ -36,7 +36,7 @@ class TestLoadTransactions(unittest.TestCase):
         """Тестирование обработки некорректного JSON."""
         mock_exists.return_value = True  # Настраиваем мок для существования файла
 
-        result = load_transactions("data/operations.json")
+        result = load_transactions("data/transactions.json")
 
         self.assertEqual(result, [])  # Ожидаем пустой список
 
@@ -46,7 +46,7 @@ class TestLoadTransactions(unittest.TestCase):
         """Тестирование, когда загруженные данные не являются списком."""
         mock_exists.return_value = True  # Настраиваем мок для существования файла
 
-        result = load_transactions("data/operations.json")
+        result = load_transactions("data/transactions.json")
 
         self.assertEqual(result, [])  # Ожидаем пустой список
 
@@ -56,7 +56,7 @@ class TestLoadTransactions(unittest.TestCase):
         """Тестирование обработки пустого файла."""
         mock_exists.return_value = True  # Настраиваем мок для существования файла
 
-        result = load_transactions("data/operations.json")
+        result = load_transactions("data/transactions.json")
 
         self.assertEqual(result, [])  # Ожидаем пустой список
 
@@ -70,7 +70,7 @@ class TestLoadTransactions(unittest.TestCase):
         """Тестирование некорректного типа id."""
         mock_exists.return_value = True  # Настраиваем мок для существования файла
 
-        result = load_transactions("data/operations.json")
+        result = load_transactions("data/transactions.json")
 
         self.assertEqual(result, [])  # Ожидаем пустой список
 
@@ -84,7 +84,7 @@ class TestLoadTransactions(unittest.TestCase):
         """Тестирование некорректного типа amount."""
         mock_exists.return_value = True  # Настраиваем мок для существования файла
 
-        result = load_transactions("data/operations.json")
+        result = load_transactions("data/transactions.json")
 
         self.assertEqual(result, [])  # Ожидаем пустой список
 

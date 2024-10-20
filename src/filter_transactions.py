@@ -1,7 +1,8 @@
 import re
+from typing import Dict, List
 
 
-def filter_transactions(transactions, search_string):
+def filter_transactions(transactions: List[Dict[str, any]], search_term: str) -> List[Dict[str, any]]:
     """
     Фильтрует список банковских операций по заданной строке поиска.
 
@@ -11,13 +12,11 @@ def filter_transactions(transactions, search_string):
     """
 
     # Компилируем регулярное выражение для поиска, игнорируя регистр
-    pattern = re.compile(re.escape(search_string), re.IGNORECASE)
+    pattern = re.compile(search_term, re.IGNORECASE)
 
     # Фильтруем транзакции, оставляя только те, у которых описание соответствует паттерну
     filtered_transactions = [
-        transaction
-        for transaction in transactions
-        if pattern.search(transaction.get("description", ""))
+        transaction for transaction in transactions if pattern.search(transaction.get("description", ""))
     ]
 
     return filtered_transactions
@@ -32,6 +31,4 @@ transactions = [
 
 # Фильтруем транзакции, ищем 'покупка'
 result = filter_transactions(transactions, "покупка")
-print(
-    result
-)
+print(result)

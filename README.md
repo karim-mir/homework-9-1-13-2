@@ -188,7 +188,7 @@ print(transactions)
 id;state;date;amount;currency_name;currency_code;from;to;description
 complete;2023-01-01;100;USD;USD;Alice;Bob;Payment
 pending;2023-02-01;200;EUR;EUR;Alice;Charlie;Transfer
-
+```
 #### 9. `get_financial_transactions_operations`
 
 **Описание:** Функция *get_financial_transactions_operations* предназначена для работы с финансовыми транзакциями, которые хранятся в файле Excel. Функция осуществляет чтение транзакционных данных и предоставляет их в виде списка словарей. Также предусмотрены тесты для проверки функциональности.
@@ -212,7 +212,7 @@ if __name__ == "__main__":
 path = "C:/Users/zheba/AppData/Local/Programs/Python/Python312/homework_done_12_1/src/transactions_excel.xlsx"
 operations = get_financial_transactions_operations(path)
 print(operations)
-
+```
 #### 10. `filter_transactions(transactions, status)`
 
 **Описание:** Функция *filter_transactions(transactions, status)* фильтрует список транзакций по заданному статусу.
