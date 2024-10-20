@@ -37,9 +37,7 @@ class TestFinancialTransactions(unittest.TestCase):
 
         # Настраиваем mock, чтобы он возвращал фейковые данные
         mock_read_excel.return_value = MagicMock()
-        mock_read_excel.return_value.iterrows.return_value = [
-            (i, row) for i, row in enumerate(fake_data)
-        ]
+        mock_read_excel.return_value.iterrows.return_value = [(i, row) for i, row in enumerate(fake_data)]
 
         # Вызываем функцию
         operations = get_financial_transactions_operations("fake_path")

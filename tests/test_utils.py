@@ -8,9 +8,7 @@ class TestLoadTransactions(unittest.TestCase):
     """Класс для тестирования функции load_transactions."""
 
     @patch("os.path.exists")
-    @patch(
-        "builtins.open", new_callable=mock_open, read_data='[{"id": 1, "amount": 100}]'
-    )
+    @patch("builtins.open", new_callable=mock_open, read_data='[{"id": 1, "amount": 100}]')
     def test_load_transactions_single_entry(self, mock_open, mock_exists):
         """Тестирование загрузки файла с одной транзакцией."""
         mock_exists.return_value = True  # Настраиваем мок для существования файла

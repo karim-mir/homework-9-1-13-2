@@ -15,9 +15,7 @@ def filter_transactions(transactions, search_string):
 
     # Фильтруем транзакции, оставляя только те, у которых описание соответствует паттерну
     filtered_transactions = [
-        transaction
-        for transaction in transactions
-        if pattern.search(transaction.get("description", ""))
+        transaction for transaction in transactions if pattern.search(transaction.get("description", ""))
     ]
 
     return filtered_transactions
